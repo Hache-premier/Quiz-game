@@ -250,5 +250,4 @@ main() {
         play_normal
     fi
 }
-
 main "$@"
