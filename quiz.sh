@@ -94,7 +94,7 @@ play_normal() {
     done
     
     local total_questions=${#QUESTIONS[@]}
-    local correct=0
+    local ncorrect=0
     local incorrect=0
     local current_streak=0
     local longest_streak=0
@@ -121,7 +121,7 @@ play_normal() {
         
         if [[ "$user_answer" == "$correct_answer" ]]; then
             echo -e "✓ Correct!"
-            ((correct++))
+            ((ncorrect++))
             ((current_streak++))
             if [[ $current_streak -gt $longest_streak ]]; then
                 longest_streak=$current_streak
@@ -141,14 +141,14 @@ play_normal() {
     
     local final_score=0
     if [[ $total_questions -gt 0 ]]; then
-        final_score=$((correct * 100 / total_questions))
+        final_score=$((ncorrect * 100 / total_questions))
     fi
     
     echo ""
     echo -e "########################################################"
     echo -e "Game Over! Final Results:"
     echo -e "########################################################"
-    echo -e "Correct_Answers:        $correct$"
+    echo -e "Correct_Answers:        $ncorrect"
     echo -e "Incorrect_Answers:      $incorrect"
     echo -e "Longest streak: $longest_streak"
     echo -e "Final score:    ${final_score}%"
@@ -167,40 +167,6 @@ play_practice() {
     echo -e "########################################################"
     echo -e "Press Enter to start..."
     read -r
-    
-    shuffle_questions
-    for i in "${!QUESTIONS[@]}"; do
-        clear
-
-        display_question $((i+1)) "$total_questions" "${QUESTIONS[$i]}"
-        
-        IFS='|' read -r _ _ _ _ _ correct_answer <<< "${QUESTIONS[$i]}"
-        
-    local user_answer
-        while true; do
-            read -r user_answer
-            if validate_answer "$user_answer"; then
-                break
-            else
-                echo -e -n "Invalid input! Please enter A, B, C, or D: "
-            fi
-        done
-        
-        user_answer=$(echo "$user_answer" | tr '[:lower:]' '[:upper:]')
-        
-        if [[ "$user_answer" == "$correct_answer" ]]; then
-            echo -e "Correct! ✓"
-        else
-            echo -e "Incorrect! The correct answer was ${correct_answer})"
-        fi
-        
-        if [[ $((i+1)) -lt $total_questions ]]; then
-            echo "                           "
-            echo -e "Press Enter to continue..."
-            read -r
-        fi
-    done
-    
     echo ""
     echo -e "#########################################################"
     echo -e "Practice session completed!"
