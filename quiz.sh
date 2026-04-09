@@ -103,7 +103,7 @@ play_normal() {
     for i in "${!QUESTIONS[@]}"; do
         clear
         
-        display_question $((i+1)) $total_questions "${QUESTIONS[$i]}"
+        display_question $((i+1)) "$total_questions" "${QUESTIONS[$i]}"
         
         IFS='|' read -r _ _ _ _ _ correct_answer <<< "${QUESTIONS[$i]}"
         
@@ -154,7 +154,7 @@ play_normal() {
     echo -e "Final score:    ${final_score}%"
     echo -e "########################################################"
     
-    local date=$(date "+%Y-%m-%d")
+    local date=$( date )
     echo "$username|$final_score|$correct/$total_questions|$date" >> "$HIGHSCORES_FILE"
     echo -e "Score saved to highscores!"
 }
@@ -172,7 +172,7 @@ play_practice() {
     for i in "${!QUESTIONS[@]}"; do
         clear
 
-        display_question $((i+1)) $total_questions "${QUESTIONS[$i]}"
+        display_question $((i+1)) "$total_questions" "${QUESTIONS[$i]}"
         
         IFS='|' read -r _ _ _ _ _ correct_answer <<< "${QUESTIONS[$i]}"
         
