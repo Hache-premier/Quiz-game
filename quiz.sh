@@ -176,7 +176,7 @@ play_practice() {
         
         IFS='|' read -r _ _ _ _ _ correct_answer <<< "${QUESTIONS[$i]}"
         
-        local user_answer
+    local user_answer
         while true; do
             read -r user_answer
             if validate_answer "$user_answer"; then
