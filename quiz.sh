@@ -223,7 +223,7 @@ show_highscores() {
     
     echo -e "############################################################"
 }
-
+# The main function to handle arguments and start the game
 main() {
     case "$1" in
         practice)
