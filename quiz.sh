@@ -99,7 +99,7 @@ play_normal() {
     local current_streak=0
     local longest_streak=0
     
-    shuffle_questions
+    shuffle-questions
     for i in "${!QUESTIONS[@]}"; do
         clear
         
