@@ -154,7 +154,7 @@ play_normal() {
     echo -e "Final score:    ${final_score}%"
     echo -e "########################################################"
     
-    local date=$( date )
+    local_date=$( date )
     echo "$username|$final_score|$correct/$total_questions|$date" >> "$HIGHSCORES_FILE"
     echo -e "Score saved to highscores!"
 }
